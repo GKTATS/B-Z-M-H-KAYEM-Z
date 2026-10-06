@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Yaren ❤️ Göktuğ</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0b0610;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ARKA PLAN */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 50, 120, 0.18), transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(150, 40, 255, 0.18), transparent 30%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* KALPLER */
+        .heart {
+            position: fixed;
+            bottom: -20px;
+            color: rgba(255, 100, 160, 0.5);
+            font-size: 20px;
+            animation: float 8s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ANA BÖLÜM */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            position: relative;
+        }
+
+        .small-title {
+            color: #ff82ad;
+            font-size: 16px;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(55px, 12vw, 120px);
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff5c9a, #ffb3d0, #c77dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .hero .subtitle {
+            margin-top: 25px;
+            font-size: clamp(18px, 4vw, 28px);
+            color: #eee;
+            max-width: 700px;
+        }
+
+        .scroll {
+            position: absolute;
+            bottom: 35px;
+            color: #aaa;
+            font-size: 14px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(10px);
+            }
+        }
+
+        /* BÖLÜMLER */
+        section {
+            padding: 90px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .section-title span {
+            color: #ff6fa5;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #aaa;
+            max-width: 650px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+        }
+
+        /* MEKTUP */
+        .letter {
+            max-width: 750px;
+            margin: auto;
+            padding: 40px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .letter p {
+            color: #ddd;
+            font-size: 18px;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            color: #ff82ad;
+            font-size: 24px;
+            text-align: right;
+            margin-top: 30px;
+        }
+
+        /* ANILAR */
+        .memories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .memory {
+            min-height: 220px;
+            padding: 30px;
+            border-radius: 25px;
+            background: linear-gradient(
+                145deg,
+                rgba(255,80,140,0.15),
+                rgba(130,70,200,0.12)
+            );
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .memory:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,120,170,0.5);
+        }
+
+        .memory .emoji {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .memory h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .memory p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        /* SAYAC */
+        .counter-box {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .counter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .time {
+            width: 120px;
+            padding: 20px 10px;
+            border-radius: 20px;
+            background: rgba(255, 90, 150, 0.12);
+        }
+
+        .time strong {
+            display: block;
+            font-size: 35px;
+            color: #ff82ad;
+        }
+
+        .time span {
+            color: #aaa;
+            font-size: 13px;
+        }
+
+        /* SON */
+        .final {
+            min-height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .final h2 {
+            font-size: clamp(35px, 8vw, 70px);
+            margin-bottom: 25px;
+        }
+
+        .final p {
+            color: #bbb;
+            font-size: 19px;
+            line-height: 1.7;
+        }
+
+        .big-heart {
+            font-size: 80px;
+            margin-top: 30px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 13px;
+        }
+
+        /* MOBİL */
+        @media (max-width: 600px) {
+            section {
+                padding: 70px 18px;
+            }
+
+            .letter {
+                padding: 25px;
+            }
+
+            .letter p {
+                font-size: 16px;
+            }
+
+            .time {
+                width: 75px;
+            }
+
+            .time strong {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- UÇAN KALPLER -->
+    <div class="heart" style="left:10%; animation-delay:0s;">❤️</div>
+    <div class="heart" style="left:25%; animation-delay:2s;">💕</div>
+    <div class="heart" style="left:45%; animation-delay:4s;">❤️</div>
+    <div class="heart" style="left:65%; animation-delay:1s;">💗</div>
+    <div class="heart" style="left:85%; animation-delay:3s;">❤️</div>
+
+    <!-- ANA SAYFA -->
+    <div class="hero">
+
+        <div class="small-title">
+            Sadece ikimize ait
+        </div>
+
+        <h1>Yaren ❤️</h1>
+
+        <div class="subtitle">
+            Bazı insanlar hayatımıza girer...
+            <br>
+            Bazıları ise hayatımızın kendisi olur.
+        </div>
+
+        <div class="scroll">
+            ↓ Hikâyemize göz at ↓
+        </div>
+
+    </div>
+
+
+    <!-- MEKTUP -->
+    <section>
+
+        <h2 class="section-title">
+            Sana <span>bir mektup</span> 💌
+        </h2>
+
+        <p class="section-description">
+            Belki bu site sadece birkaç satır koddan oluşuyor.
+            Ama içindeki her kelimenin benim için bir anlamı var.
+        </p>
+
+        <div class="letter">
+
+            <p>
+                Yaren,
+            </p>
+
+            <p>
+                Hayatıma girdiğin günden beri bazı şeyler eskisi gibi değil.
+                Gülüşünün, gözlerinin ve yanımda oluşunun benim için
+                ne kadar değerli olduğunu bazen kelimelerle anlatamıyorum.
+            </p>
+
+            <p>
+                Seninle konuştuğumda dünyanın bütün karmaşası biraz
+                olsun sessizleşiyor. Yanımda olduğunu bilmek bile
+                bana iyi geliyor.
+            </p>
+
+            <p>
+                Gelecekte nerede oluruz, hayat bizi nereye götürür
+                bilmiyorum. Ama bildiğim bir şey var:
+                seni kaybetmek istemiyorum.
+            </p>
+
+            <p>
+                İyi ki varsın.
+                İyi ki hayatımdasın.
+            </p>
+
+            <div class="signature">
+                Seni seven,<br>
+                Göktuğ ❤️
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ANILAR -->
+    <section>
+
+        <h2 class="section-title">
+            Bizim <span>anılarımız</span> 📸
+        </h2>
+
+        <p class="section-description">
+            Buraya zamanla birlikte yaşadığımız güzel anıları
+            ve fotoğraflarımızı ekleyeceğiz.
+        </p>
+
+        <div class="memories">
+
+            <div class="memory">
+                <div class="emoji">🥰</div>
+                <h3>İlk Günlerimiz</h3>
+                <p>
+                    Her şeyin başladığı ve birbirimizi
+                    daha yeni tanımaya başladığımız günler.
+                </p>
+            </div>
+
+            <div class="memory">
+                <div class="emoji">❤️</div>
+                <h3>Birlikte</h3>
+                <p>
+                    Yan yana olduğumuz ve zamanın
+                    nasıl geçtiğini anlamadığımız anlar.
+                </p>
+            </div>
+
+            <div class="memory">
+                <div class="emoji">🌙</div>
+                <h3>Gece Konuşmaları</h3>
+                <p>
+                    Saatlerce konuştuğumuz,
+                    uyumayı unuttuğumuz geceler.
+                </p>
+            </div>
+
+            <div class="memory">
+                <div class="emoji">♾️</div>
+                <h3>Geleceğimiz</h3>
+                <p>
+                    Henüz yaşamadığımız ama birlikte
+                    yaşamayı istediğimiz bütün güzel günler.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ZAMAN SAYACI -->
+    <section>
+
+        <div class="counter-box">
+
+            <h2 class="section-title">
+                Birlikte geçen <span>zamanımız</span> ⏳
+            </h2>
+
+            <p class="section-description">
+                Her geçen saniye bizim hikâyemize bir saniye daha ekliyor.
+            </p>
+
+            <div class="counter">
+
+                <div class="time">
+                    <strong id="days">0</strong>
+                    <span>GÜN</span>
+                </div>
+
+                <div class="time">
+                    <strong id="hours">0</strong>
+                    <span>SAAT</span>
+                </div>
+
+                <div class="time">
+                    <strong id="minutes">0</strong>
+                    <span>DAKİKA</span>
+                </div>
+
+                <div class="time">
+                    <strong id="seconds">0</strong>
+                    <span>SANİYE</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FİNAL -->
+    <section class="final">
+
+        <div>
+
+            <h2>
+                İyi ki <span style="color:#ff6fa5;">sen.</span>
+            </h2>
+
+            <p>
+                Bu sitenin sonu olabilir...
+                <br>
+                Ama bizim hikâyemizin sonu olmasın. ❤️
+            </p>
+
+            <div class="big-heart">
+                ❤️
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        Yaren ❤️ Göktuğ
+        <br>
+        Sonsuza kadar hatırlamak istediğimiz anılar için.
+    </footer>
+
+
+    <!-- SAYACI ÇALIŞTIRAN KOD -->
+    <script>
+
+        /*
+         * BURAYI DAHA SONRA DEĞİŞTİREBİLİRİZ.
+         *
+         * Şimdilik:
+         * 29 Nisan 2026 - 20:00
+         *
+         * Eğer ilişkinizin başlangıç tarihi farklıysa
+         * sadece bu tarihi değiştireceğiz.
+         */
+
+        const startDate = new Date("2026-04-29T20:00:00");
+
+        function updateCounter() {
+
+            const now = new Date();
+
+            let difference = now - startDate;
+
+            if (difference < 0) {
+                difference = 0;
+            }
+
+            const seconds = Math.floor(difference / 1000);
+
+            const days = Math.floor(seconds / 86400);
+            const hours = Math.floor((seconds % 86400) / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const remainingSeconds = seconds % 60;
+
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = remainingSeconds;
+        }
+
+        updateCounter();
+
+        setInterval(updateCounter, 1000);
+
+    </script>
+
+</body>
+</html>
