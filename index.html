@@ -3749,5 +3749,69 @@ async function loadAllPhotos(){
 
 loadAllPhotos();
 </script>
+<style>
+.auto-photo{
+    opacity:0;
+    transform:translateY(35px);
+    transition:opacity .8s ease,transform .8s ease,box-shadow .5s ease!important;
+}
+
+.auto-photo.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.auto-photo:hover{
+    box-shadow:0 20px 60px rgba(255,70,120,.3)!important;
+}
+
+.auto-photo:hover img{
+    transform:scale(1.045);
+    filter:brightness(1.08) saturate(1.08);
+}
+
+.auto-photo img{
+    transition:transform 1s ease,filter 1s ease!important;
+}
+
+@media(max-width:700px){
+    .auto-gallery{
+        grid-template-columns:1fr!important;
+        gap:14px!important;
+    }
+
+    .auto-photo{
+        grid-column:span 1!important;
+        min-height:330px!important;
+    }
+}
+</style>
+
+<script>
+function cinematicGallery(){
+
+    const photos=document.querySelectorAll(".auto-photo");
+
+    if(!photos.length){
+        setTimeout(cinematicGallery,500);
+        return;
+    }
+
+    const observer=new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    },{threshold:.12});
+
+    photos.forEach(photo=>{
+        observer.observe(photo);
+    });
+}
+
+setTimeout(cinematicGallery,700);
+</script>
 </body>
 </html>
