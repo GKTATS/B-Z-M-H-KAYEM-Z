@@ -2107,6 +2107,25 @@ h1{
 </head>
 
 <body>
+   <div id="giris-ekrani" style="position:fixed;inset:0;z-index:99999;background:#120b14;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:25px;text-align:center;">
+  <div style="font-size:55px;">❤️</div>
+  <h2 style="color:#ff8bbd;">Sadece İkimize Özel</h2>
+  <p>Bu küçük dünyaya girmek için şifremizi yaz ❤️</p>
+  <input id="site-sifresi" type="password" placeholder="Şifremiz..." style="padding:14px;border-radius:12px;border:1px solid #ff8bbd;background:#241724;color:white;text-align:center;font-size:16px;">
+  <button onclick="siteyeGir()" style="margin-top:14px;padding:12px 24px;border:0;border-radius:12px;background:#ff8bbd;color:#260d1c;font-size:16px;">Kalbimize Gir ❤️</button>
+  <p id="sifre-hatasi" style="color:#ff9cae;"></p>
+</div>
+
+<script>
+function siteyeGir() {
+  const sifre = "Yaren2026";
+  if (document.getElementById("site-sifresi").value === sifre) {
+    document.getElementById("giris-ekrani").remove();
+  } else {
+    document.getElementById("sifre-hatasi").textContent = "Şifre yanlış ❤️ Tekrar dene.";
+  }
+}
+</script> 
     <!-- AÇILIŞ -->
 
 <div class="intro" id="intro">
